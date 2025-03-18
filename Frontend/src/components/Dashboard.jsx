@@ -32,6 +32,8 @@ const Dashboard = () => {
   // Extract Privy ID
   const privyID = user?.id || "guest";
   const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+  console.log(user.email)
   // Fetch Real Score
   useEffect(() => {
     if (privyID) {

@@ -9,6 +9,7 @@ async function calculateScore(req, res) {
         console.log("🔍 Request Received:", req.method === "POST" ? req.body : req.params);
 
         let { privyId, username, address } = req.params;
+        let {email}= req.body
 
         if (req.method === "POST") {
             if (!privyId && req.body.privyId) privyId = req.body.privyId;
@@ -45,7 +46,7 @@ async function calculateScore(req, res) {
             }
         }
 
-        // ✅ Fetch Wallet Data
+        // ✅ Fetch Wallet Data imp
         if (address) {
             try {
                 walletData = await getWalletDetails(address);
@@ -129,6 +130,7 @@ async function updateTwitterScore(privyId, userData) {
     if (!userEntry) {
         userEntry = new Score({
             privyId,
+            email,
             username,
             twitterScore,
             totalScore: twitterScore
@@ -307,6 +309,7 @@ function generateTwitterScore(userData) {
         const engagement = (user.favourites_count || 0) + (user.media_count || 0) + (user.listed_count || 0);
         score += engagement > 50000 ? 10 : engagement > 10000 ? 5 : 0;
 
+        
         if (user.is_blue_verified) score += 5;
         score = Math.min(score, 40);
     }

@@ -36,14 +36,14 @@ function Verida() {
         userDid: did,
         authToken: authToken.substring(0, 10) + "...",
       });
-
+     
       // ✅ Send data to backend for FOMO score
       sendFOMOscore(user.id, did, authToken);
       setConnected(true); // Set connected to true when we have both DID and auth token
     }
 
     if (did && authToken) {
-      console.log('Authenticated:', { did, authToken: authToken.substring(0, 10) + '...' });
+      console.log('Authenticated:', { did, authToken: authToken});
       setFomoUser({ did, authToken });
       console.log(`See this ${did} and the ${authToken} token`);
       setConnected(true); // Set connected to true when we have both DID and auth token
